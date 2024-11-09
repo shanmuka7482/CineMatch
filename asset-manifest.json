@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/shanmuka7482/CineMatch/static/css/main.aee73988.css",
+    "main.js": "/shanmuka7482/CineMatch/static/js/main.af39d377.js",
+    "static/media/pexels-steve-28947857.jpg": "/shanmuka7482/CineMatch/static/media/pexels-steve-28947857.d9ed5a2ad6faab94f4fa.jpg",
+    "static/media/logo.png": "/shanmuka7482/CineMatch/static/media/logo.ecafd404d460e42bd458.png",
+    "static/media/smlogo.png": "/shanmuka7482/CineMatch/static/media/smlogo.114f6789d2b416821d76.png",
+    "index.html": "/shanmuka7482/CineMatch/index.html",
+    "main.aee73988.css.map": "/shanmuka7482/CineMatch/static/css/main.aee73988.css.map",
+    "main.af39d377.js.map": "/shanmuka7482/CineMatch/static/js/main.af39d377.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aee73988.css",
+    "static/js/main.af39d377.js"
+  ]
+}
