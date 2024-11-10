@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import image from "./images/logo.png"
 import { Link } from 'react-router-dom'
+import Model from './Home/Model';
 
 function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const openModel = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <header
     className="border-b bg-white font-sans min-h-[60px] px-10 py-2 tracking-wide relative z-50"
@@ -31,8 +40,7 @@ function Header() {
         </svg>
         <input
           type="search"
-          data-modal-target="crud-modal"
-          data-modal-toggle="crud-modal"
+          onClick={openModel}
           placeholder="Search..."
           id="headder_search"
           className="w-full outline-none border-0 bg-transparent text-teal-500 font-semibold text-[15px]"
@@ -41,14 +49,13 @@ function Header() {
       </div>
       <Link to="/login">
       <button
-            data-modal-target="crud-modal"
-            data-modal-toggle="crud-modal"
             type="button"
             class="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-6 py-3 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
           >
             Login
           </button></Link>
     </div>
+    <Model isOpen={isModalOpen} onClose={closeModal} />
   </header>
   )
 }
