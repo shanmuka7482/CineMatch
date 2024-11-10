@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from mlModel import get_movie_recommendations
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+import pandas as pd
 
 class Data(BaseModel):
     movie_title: str | None = None
@@ -16,11 +17,33 @@ app = FastAPI()
 def index():
     return {'message': 'Movie recommendation system'}
 
+@app.get("/popular")
+async def get_popular_movie():
+    df = pd.read_csv("movies.csv", sep = ",")
+    sorted_df = df.sort_values(by=["popularity"], ascending=False)
+    rows = sorted_df.head().to_dict(orient="records")
+
+    return JSONResponse(content=jsonable_encoder(rows))
+
 @app.post('/recommend')
 async def predict_movie(data:Data):
-    val = get_movie_recommendations(data.movie_title,data.filter_type,data.filter_value)
+    recList = get_movie_recommendations(data.movie_title,data.filter_type,data.filter_value)
     
-    return JSONResponse(content=jsonable_encoder(val))
+    df = pd.read_csv("movies.csv", sep = ",")
+
+    rowData = []
+
+    for i in range(len(recList)):
+        row = df[df["original_title"]== recList[i]].fillna(pd.NA)
+        rowData.append(row.to_dict(orient="records"))
+
+
+    res = {
+        "recList": recList, #list of recommended movies
+        "rows": rowData #list of row 
+    }
+
+    return JSONResponse(content=jsonable_encoder(res))
     
 
 if __name__ == '__main__':
