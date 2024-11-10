@@ -5,6 +5,7 @@ from mlModel import get_movie_recommendations
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 import pandas as pd
+from fastapi.middleware.cors import CORSMiddleware
 
 class Data(BaseModel):
     movie_title: str | None = None
@@ -13,9 +14,23 @@ class Data(BaseModel):
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.get('/')
 def index():
-    return {'message': 'Movie recommendation system'}
+    return {'message': 'Movie recommendation system API'}
+
+# @app.post()
 
 @app.get("/popular")
 async def get_popular_movie():
@@ -40,7 +55,7 @@ async def predict_movie(data:Data):
 
     res = {
         "recList": recList, #list of recommended movies
-        "rows": rowData #list of row 
+        "rows": rowData     #list of row of each movie
     }
 
     return JSONResponse(content=jsonable_encoder(res))

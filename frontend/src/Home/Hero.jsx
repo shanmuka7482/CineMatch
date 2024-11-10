@@ -23,7 +23,6 @@ function Hero() {
             className="w-full h-full object-cover opacity-50"
           />
         </div>
-
         <div className="relative max-w-screen-lg mx-auto z-10 text-white flex flex-col items-left space-y-4 font-medium pr-48">
           <h1 className="text-6xl font-bold leading-tight">Find Movie</h1>
           <h1 className="text-6xl font-bold leading-tight">recommendations</h1>

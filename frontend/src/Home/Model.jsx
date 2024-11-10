@@ -1,25 +1,55 @@
 import React from "react";
 import { useState } from 'react';
+import axios from 'axios'
 
 const Model = ({ isOpen, onClose }) => {
-    const [textValue, setTextValue] = useState('');
-    const [selectValue, setSelectValue] = useState('Select by category');
+    const [movieVal, setMovieVal] = useState('');
+    const [filterType, setFilterType] = useState('Select by category');
+    const [filterVal,SetFilterVal] = useState("")
   
     // Function to handle changes in the text input
     const handleTextChange = (e) => {
-      setTextValue(e.target.value);
+      setMovieVal(e.target.value);
       if (e.target.value) {
-        setSelectValue('Select by category'); // Reset the select if text is entered
+        setFilterType('Select by category'); // Reset the select if text is entered
       }
     };
   
     // Function to handle changes in the select input
     const handleSelectChange = (e) => {
-      setSelectValue(e.target.value);
+      setFilterType(e.target.value);
       if (e.target.value !== 'Select by category') {
-        setTextValue(''); // Clear text input if select is changed
+        setMovieVal(''); // Clear text input if select is changed
       }
     };
+
+    const handleFilterChange = (e) => {
+      SetFilterVal(e.target.value)
+      if (e.target.value !== 'Select by category') {
+        setMovieVal('');
+      }
+    }
+
+    const search = async(e)=>{
+      e.preventDefault()
+      
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/recommend",{
+          movie_title: movieVal || null,
+          filter_type: (filterType!=="Select by category"?filterType :null),
+          filter_value: filterVal || null
+        }
+        )
+        console.log(response)
+      } catch (error) {
+        console.log("error when sending request: ",error)
+      }
+
+      setMovieVal("")
+      setFilterType("Select by category")
+      SetFilterVal("")
+    }
+
   return (
     <div>
       <div
@@ -49,9 +79,9 @@ const Model = ({ isOpen, onClose }) => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                   />
                 </svg>
@@ -63,7 +93,7 @@ const Model = ({ isOpen, onClose }) => {
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Movie Name
@@ -75,9 +105,9 @@ const Model = ({ isOpen, onClose }) => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Type Movie name"
                     required=""
-                    value={textValue}
+                    value={movieVal}
                     onChange={handleTextChange}
-                    disabled={selectValue !== "Select by category"}
+                    disabled={filterType !== "Select by category"}
                   />
                 </div>
                 <div className="col-span-2">
@@ -85,7 +115,7 @@ const Model = ({ isOpen, onClose }) => {
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    for="category"
+                    htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Category
@@ -93,17 +123,36 @@ const Model = ({ isOpen, onClose }) => {
                   <select
                     id="category"
                     name="category"
-                    value={selectValue}
+                    value={filterType}
                     onChange={handleSelectChange}
-                    disabled={textValue !== ""}
+                    disabled={movieVal !== ""}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option selected="">Select by category</option>
-                    <option value="TV">TV/Monitors</option>
-                    <option value="PC">PC</option>
-                    <option value="GA">Gaming/Console</option>
-                    <option value="PH">Phones</option>
+                    <option defaultValue="">Select by category</option>
+                    <option value="Genre">Genre</option>
+                    <option value="Director">Director</option>
+                    {/* <option value=""></option>
+                    <option value=""></option> */}
                   </select>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Movie Name
+                  </label>
+                  <input
+                    type="text"
+                    name="Movie name"
+                    id="name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Select filter value"
+                    required=""
+                    value={filterVal}
+                    onChange={handleFilterChange}
+                    disabled={movieVal !== ""}
+                  />
                 </div>
               </div>
               <button
@@ -114,17 +163,17 @@ const Model = ({ isOpen, onClose }) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-6"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0 1 18 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0 1 18 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 0 1 6 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5"
                   />
                 </svg>
-                <span className="px-3">Search</span>
+                <span className="px-3" onClick={search}>Search</span>
               </button>
             </form>
           </div>
