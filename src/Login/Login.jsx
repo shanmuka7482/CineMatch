@@ -50,9 +50,9 @@ function login() {
                 Password
               </label>
               <div className="text-sm">
-                <a href="/forgotPassword" className="font-semibold text-teal-600 hover:text-teal-500">
+                <Link to="/forgotPassword" className="font-semibold text-teal-600 hover:text-teal-500">
                   Forgot password?
-                </a>
+                </Link>
               </div>
             </div>
             <div className="mt-2">
