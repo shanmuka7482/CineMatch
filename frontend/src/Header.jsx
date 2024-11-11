@@ -62,20 +62,23 @@ function Header() {
         <button
             type="button"
             onClick={search}
-            className="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-6 py-3 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
+            className="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-4 my-0.5 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
           >
             Search
          </button>        
 
       </div>
-      <Link to="/login">
+      {/* <Link to="/login">
       <button
             type="button"
             className="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-6 py-3 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
           >
             Login
       </button>
-      </Link>
+      </Link> */}
+      <a href="https://github.com/shanmuka7482/CineMatch">
+        <img src="https://img.icons8.com/?size=100&id=106562&format=png&color=000000" alt="Github" className='w-11'/>
+      </a>
     </div>
     <Model isOpen={isModalOpen} onClose={closeModal} />
   </header>
