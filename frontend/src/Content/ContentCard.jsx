@@ -6,7 +6,8 @@ function ContentCard({ movieVal="Iron man", filterType="Select by category" , fi
   const [data, setData] = useState([]); // Initialize with an empty array
   const [loading, setLoading] = useState(true); // Loading state for UX
   const [error, setError] = useState(null); // Error state
-
+  const [cacheData,setCacheData] = useState([])
+  
   const navigate = useNavigate();
 
   const handleClick = (movieVal) => {
@@ -15,6 +16,7 @@ function ContentCard({ movieVal="Iron man", filterType="Select by category" , fi
   };
 
   useEffect(() => {
+    
     const fetchData = async () => {
       setLoading(true);
       setError(null);
@@ -28,6 +30,9 @@ function ContentCard({ movieVal="Iron man", filterType="Select by category" , fi
         });
 
         const cardData = response.data.rows.flat();
+        if(movieVal!==""){
+          localStorage.setItem('recentSearch', JSON.stringify(movieVal));
+        }
         await fetchImages(cardData); // Fetch images for each movie
 
       } catch (err) {
@@ -72,7 +77,6 @@ function ContentCard({ movieVal="Iron man", filterType="Select by category" , fi
           key={index}
           className="mx-3 flex flex-col self-start my-5 rounded-lg bg-slate-100 text-surface shadow-secondary-1 sm:shrink-0 sm:grow sm:basis-0"
         >
-            {console.log(card)}
           <div className="flex justify-center p-6">
             <img
               className="rounded-t-lg h-[30rem] w-96"

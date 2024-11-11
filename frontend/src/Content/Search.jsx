@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Search = ({ moviename, Category, filtername }) => {
@@ -7,6 +7,7 @@ const Search = ({ moviename, Category, filtername }) => {
     const [filterType, setFilterType] = useState(Category);
     const [filterVal,SetFilterVal] = useState(filtername)
   
+
     const navigate = useNavigate();
 
     const search = (e) => {
@@ -38,6 +39,12 @@ const Search = ({ moviename, Category, filtername }) => {
         setMovieVal('');
       }
     }
+    useEffect(() => {
+      
+      setMovieVal(movieVal)
+      
+    }, [moviename])
+    
 
   return (
     <div>
