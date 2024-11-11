@@ -28,7 +28,7 @@ app.add_middleware(
 
 @app.get('/')
 def index():
-    return {'message': 'Movie recommendation system API'}
+    return {'message': 'Hi from sandeep'}
 
 # @app.post()
 
@@ -51,7 +51,6 @@ async def predict_movie(data:Data):
     for i in range(len(recList)):
         row = df[df["original_title"]== recList[i]].fillna(pd.NA)
         rowData.append(row.to_dict(orient="records"))
-
 
     res = {
         "recList": recList, #list of recommended movies

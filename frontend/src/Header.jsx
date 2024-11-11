@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import image from "./images/logo.png"
 import { Link } from 'react-router-dom'
 import Model from './Home/Model';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +14,18 @@ function Header() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const [searchVal,setSearchVal] = useState("")
+
+  const navigate = useNavigate()
+  
+  const search = (e) => {
+    e.preventDefault();
+    navigate(
+      `/content?movieVal=${searchVal}`
+    );
+  };
+
   return (
     <header
     className="border-b bg-white font-sans min-h-[60px] px-10 py-2 tracking-wide relative z-50"
@@ -40,12 +53,20 @@ function Header() {
         </svg>
         <input
           type="search"
-          onClick={openModel}
+          value={searchVal}
           placeholder="Search..."
           id="headder_search"
+          onChange={(e)=>setSearchVal(e.target.value)}
           className="w-full outline-none border-0 bg-transparent text-teal-500 font-semibold text-[15px]"
-
         />
+        <button
+            type="button"
+            onClick={search}
+            className="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-6 py-3 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
+          >
+            Search
+         </button>        
+
       </div>
       <Link to="/login">
       <button
@@ -53,7 +74,8 @@ function Header() {
             className="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-6 py-3 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
           >
             Login
-          </button></Link>
+      </button>
+      </Link>
     </div>
     <Model isOpen={isModalOpen} onClose={closeModal} />
   </header>

@@ -9,6 +9,7 @@ const Content = () => {
     const movieVal = params.get('movieVal');
     const filterType = params.get('filterType');
     const filterVal = params.get('filterVal');
+
   return (
     <div>
         <Search  moviename={movieVal} Category={filterType} filtername={filterVal} />
