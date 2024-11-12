@@ -3,6 +3,7 @@ import image from "./images/logo.png"
 import { Link } from 'react-router-dom'
 import Model from './Home/Model';
 import { useNavigate } from 'react-router-dom';
+import { FaGithub } from "react-icons/fa";
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,7 +78,7 @@ function Header() {
       </button>
       </Link> */}
       <a href="https://github.com/shanmuka7482/CineMatch">
-        <img src="https://img.icons8.com/?size=100&id=106562&format=png&color=000000" alt="Github" className='w-11'/>
+        <FaGithub size={"35"}/>
       </a>
     </div>
     <Model isOpen={isModalOpen} onClose={closeModal} />
