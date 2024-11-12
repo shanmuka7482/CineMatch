@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Cardgenerator() {
   const [data, setData] = useState([]); // Initialize with an empty array
@@ -104,9 +105,15 @@ function Cardgenerator() {
   return (
     <>
       {
-        recentName?(
+        data.length>0?(
           <>
-            <h2 className="py-8 px-10 font-semibold text-2xl">Since Your Searched For "{recentName}"</h2>
+            {
+              recentName?(
+                <h2 className="py-8 px-10 font-semibold text-2xl">Since You Recently Searched For "{recentName}"</h2>
+              ):(
+                <h2 className="py-8 px-10 font-semibold text-2xl">Most Watched Movies</h2>
+              )
+            }
             <div id="card-container" className="grid grid-cols-3 gap-2 px-5">
               {data.map((card, index) => (
                 <div
@@ -133,43 +140,15 @@ function Cardgenerator() {
                       </button>
                     </div>
                   </div>
+                </div>
+                ))
+              }
             </div>
-        ))}
-      </div>
           </>
         ):(
-          <>
-              <h2 className="py-8 px-10 font-semibold text-2xl">Most Watched Movies</h2>
-              <div id="card-container" className="grid grid-cols-3 gap-2 px-5">
-                {data.map((card, index) => (
-                  <div
-                    key={index}
-                    className="mx-3 flex flex-col self-start my-5 rounded-lg bg-slate-100 text-surface shadow-secondary-1 sm:shrink-0 sm:grow sm:basis-0"
-                  >
-                    <div className="flex justify-center p-6">
-                      <img
-                        className="rounded-t-lg h-[30rem] w-96"
-                        src={card.imageUrl}
-                        alt="Los Angeles Skyscrapers"
-                      /></div>
-                    <div className="p-6">
-                      <h5 className="mb-2 text-xl font-medium leading-tight">
-                        {card.title}
-                      </h5>
-                      <p className="mb-2 text-base"> <span className="font-bold"> Genere:</span> {card.genres}</p>
-                      <p className="mb-2 text-base"> <span className="font-bold"> Year:</span> {card.release_date.substring(0, 4)}</p>
-                      <p className="mb-2 text-base"> <span className="font-bold"> Popularity:</span> {card.popularity.toString().substring(0,3)}</p>
-                      <div className="!text-right">
-                        <button className="bg-teal-500 hover:bg-teal-600 text-white text-base tracking-wide px-6 py-3 rounded-lg transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-fit"
-                        onClick={()=>handleClick(card.title)}>
-                          More like This
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-          </>
+          <div className="w-24 m-auto">
+            <CircularProgress color="inherit" />
+          </div>
         )
       }
     </>
