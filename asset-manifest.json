@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/CineMatch/static/css/main.aee73988.css",
-    "main.js": "/CineMatch/static/js/main.4d147c6e.js",
+    "main.css": "/CineMatch/static/css/main.138031d2.css",
+    "main.js": "/CineMatch/static/js/main.63c916b6.js",
     "static/media/pexels-steve-28947857.jpg": "/CineMatch/static/media/pexels-steve-28947857.d9ed5a2ad6faab94f4fa.jpg",
     "static/media/logo.png": "/CineMatch/static/media/logo.ecafd404d460e42bd458.png",
     "static/media/smlogo.png": "/CineMatch/static/media/smlogo.114f6789d2b416821d76.png",
     "index.html": "/CineMatch/index.html",
-    "main.aee73988.css.map": "/CineMatch/static/css/main.aee73988.css.map",
-    "main.4d147c6e.js.map": "/CineMatch/static/js/main.4d147c6e.js.map"
+    "main.138031d2.css.map": "/CineMatch/static/css/main.138031d2.css.map",
+    "main.63c916b6.js.map": "/CineMatch/static/js/main.63c916b6.js.map"
   },
   "entrypoints": [
-    "static/css/main.aee73988.css",
-    "static/js/main.4d147c6e.js"
+    "static/css/main.138031d2.css",
+    "static/js/main.63c916b6.js"
   ]
 }
