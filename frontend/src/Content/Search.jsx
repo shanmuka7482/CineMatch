@@ -90,8 +90,7 @@ const Search = ({ moviename, Category, filtername }) => {
             <option value="genres">Genres</option>
             <option value="director">Director</option>
             <option value="cast">Cast</option>
-            {/* <option value=""></option>
-                    <option value=""></option> */}
+            <option value="keywords">Keywords</option>
           </select>
         </div>
         <div className="col-span-2">

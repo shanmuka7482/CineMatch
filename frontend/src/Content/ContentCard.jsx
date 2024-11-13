@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 function ContentCard({ movieVal="Iron man", filterType="Select by category" , filterVal }) {
   const [data, setData] = useState([]); // Initialize with an empty array
-  const [loading, setLoading] = useState(true); // Loading state for UX
-  const [error, setError] = useState(null); // Error state
-  const [cacheData,setCacheData] = useState([])
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
   
   const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ function ContentCard({ movieVal="Iron man", filterType="Select by category" , fi
     fetchData();
   }, [movieVal, filterType, filterVal]); // Dependencies ensure refetch on prop change
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="w-24 m-auto"><CircularProgress color="inherit"/></div>;
   if (error) return <p>{error}</p>;
 
   return (
