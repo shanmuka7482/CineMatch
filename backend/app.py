@@ -16,6 +16,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "https://shanmuka7482.github.io/",
 ]
 
 app.add_middleware(
