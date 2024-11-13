@@ -12,6 +12,9 @@ function Cardgenerator() {
     navigate(`/content?movieVal=${movieVal}&filterType=Select by category&filterVal=`);
   };
 
+  const handleImageClick = (moviename) =>{
+    navigate(`/Movie?movieName=${moviename}`);
+  }
   useEffect(() => {
     // Fetch data from the API once the component mounts
       console.log("useEffect called.")
@@ -114,11 +117,12 @@ function Cardgenerator() {
                   className="mx-3 flex flex-col self-start my-5 rounded-lg bg-slate-100 text-surface shadow-secondary-1 sm:shrink-0 sm:grow sm:basis-0"
                 >
                   <div className="flex justify-center p-6">
+                    <a onClick={()=>{handleImageClick(card.title)}}className="cursor-pointer">
                     <img
                       className="rounded-t-lg h-[30rem] w-96"
                       src={card.imageUrl}
                       alt="Los Angeles Skyscrapers"
-                    /></div>
+                    /></a></div>
                   <div className="p-6">
                     <h5 className="mb-2 text-xl font-medium leading-tight">
                       {card.title}
@@ -146,12 +150,13 @@ function Cardgenerator() {
                     key={index}
                     className="mx-3 flex flex-col self-start my-5 rounded-lg bg-slate-100 text-surface shadow-secondary-1 sm:shrink-0 sm:grow sm:basis-0"
                   >
-                    <div className="flex justify-center p-6">
-                      <img
-                        className="rounded-t-lg h-[30rem] w-96"
-                        src={card.imageUrl}
-                        alt="Los Angeles Skyscrapers"
-                      /></div>
+                  <div className="flex justify-center p-6">
+                    <a onClick={()=>{handleImageClick(card.title)}}className="cursor-pointer">
+                    <img
+                      className="rounded-t-lg h-[30rem] w-96"
+                      src={card.imageUrl}
+                      alt="Los Angeles Skyscrapers"
+                    /></a></div>
                     <div className="p-6">
                       <h5 className="mb-2 text-xl font-medium leading-tight">
                         {card.title}

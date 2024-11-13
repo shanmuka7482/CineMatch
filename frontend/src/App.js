@@ -6,6 +6,7 @@ import Signup from "./Login/Signup";
 import ForgotPassword from "./Login/ForgotPassword";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Content from "./Content/Content";
+import MoviesDescbie from "./MoviesDescbie";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/content" element={<Content/>}/>
+          <Route path="/Movie" element={<MoviesDescbie/>}/>
         </Routes>
         <Footer />
       </div>
