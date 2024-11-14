@@ -16,7 +16,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    "https://shanmuka7482.github.io/",
+    "https://shanmuka7482.github.io/CineMatch/",
 ]
 
 app.add_middleware(
