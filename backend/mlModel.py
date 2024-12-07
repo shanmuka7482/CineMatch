@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load the dataset
-movies = pd.read_csv('./Movies.csv')
+movies = pd.read_csv('./Movies1.csv')
 
 # Step 1: Relevant Feature Selection
 # Selecting relevant features for recommendation
