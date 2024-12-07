@@ -4,7 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import os
 
 current_dir = os.path.dirname(__file__)  # Directory of mlModel.py
-file_path = os.path.join(current_dir, 'Movies1.csv')
+file_path = os.path.join(current_dir, 'movies1.csv')
 
 # Load the dataset
 movies = pd.read_csv(file_path)
