@@ -1,9 +1,13 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import os
+
+current_dir = os.path.dirname(__file__)  # Directory of mlModel.py
+file_path = os.path.join(current_dir, 'Movies1.csv')
 
 # Load the dataset
-movies = pd.read_csv('./Movies1.csv')
+movies = pd.read_csv(file_path)
 
 # Step 1: Relevant Feature Selection
 # Selecting relevant features for recommendation
